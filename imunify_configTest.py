@@ -44,11 +44,8 @@ for items in pd_keys:
 
 feat_mngmt_data = imunify_cli_cmds('imunify360-agent feature-management show --json')
 feat_data = json.loads(feat_mngmt_data.stdout)
-for i in feat_data['items']:
- print(feat_data['items']['features']['av'])
- print(feat_data['items']['features']['proactive'])
 for item in feat_data['items']:
     print(f"User: {item['name']}")
     print(f"AV: {item['features']['av']}")
     print(f"Proactive: {item['features']['proactive']}")
-    print()
+    print()  

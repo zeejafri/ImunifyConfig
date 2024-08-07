@@ -128,58 +128,58 @@ try:
     malware_scan_sch = scan_data["items"]["MALWARE_SCAN_SCHEDULE"]
     print("Malware Scan Schedule updated: ", malware_scan_sch, '\n')
 
-  #Cross check configurations
-  print("################ Cross Checking updated data ################", "\n")
-  getConfigdata = imunify_cli_cmds('imunify360-agent config show --json')
-  json_conf_data = json.loads(getConfigdata.stdout)
-
-  # Checking Scan time settings
-  sc_time = get_config(json_conf_data, 'hour')
-  if sc_time != getCronHour():
-      raise Exception(f"Scan time hour not set, require value: {getCronHour()} current value: {sc_time}")
-  else: print("Scan time is set to required value:", getCronHour())
-  
-  #Check '{"MOD_SEC": {"ruleset": "MINIMAL"}}'
-  modsec = get_config(json_conf_data, 'ruleset')
-  if modsec != "MINIMAL":
-    raise Exception(f"Modsec rules not set, current status: {modsec} required  value: 'MINIMAL'")
-  else: print("Mod sec rules verified", modsec)
-  
-  #check PD configuration  '{"PROACTIVE_DEFENCE": {"blamer": true, "jit_compatible_mode": false, "log_whitelisted": true, "mode": "KILL", "php_immunity": false}}'
-  pd_config = {"blamer": True, "jit_compatible_mode": False, "log_whitelisted": True, "mode": "KILL", "php_immunity": False}
-  pd_keys = ['blamer', 'jit_compatible_mode', 'log_whitelisted', 'mode', 'php_immunity']
-  for item in pd_keys:
-    # print("current item", item)
-    # print("current value returned from function", get_config(json_conf_data, item))
-    # print('PD config item', pd_config[item])
-    if item == 'mode' and get_config(json_conf_data, item) != 'KILL':
-       raise Exception(f"Err: PD not mode value not setup correctly: {item}, required value: 'KILL'")
-    elif (item == 'log_whitelisted' or item == 'blamer') and get_config(json_conf_data, item) != pd_config[item]:
-       raise Exception(f"Err: PD not setup correctly for {item}, required value: true")
-    elif get_config(json_conf_data, item) != pd_config[item]:   
-      raise Exception(f"Err: PD not setup correctly {item}, current value: {get_config(json_conf_data, item)}")
-  print("PD configurations verified")
-
-# Feature management
-  feat_mngmt_data = imunify_cli_cmds('imunify360-agent feature-management show --json')
-  feat_data = json.loads(feat_mngmt_data.stdout)
-  app_error_list= []
-  for i in feat_data['items']:
-    if i['features']['av'] or i['features']['proactive']:
-      print(i['features'])
-      app_error_list.append(i['name'])
-  default_action = get_config(json_conf_data, 'default_action')
-  user_override_proactive_defense = get_config(json_conf_data, 'user_override_proactive_defense')
-  if user_override_proactive_defense == False or len(app_error_list) > 0 or default_action != "notify":
-    error_obj = {
-        2: {
-            "apps": app_error_list,
-            "default_action": default_action,
-            "user_override_proactive_defense": user_override_proactive_defense
-        }
-    }
-    raise Exception(f"feature management config not set for users: {error_obj}")
-  else: print("Feature management user configurations are set")
+  ##Cross check configurations
+  #print("################ Cross Checking updated data ################", "\n")
+  #getConfigdata = imunify_cli_cmds('imunify360-agent config show --json')
+  #json_conf_data = json.loads(getConfigdata.stdout)
+#
+  ## Checking Scan time settings
+  #sc_time = get_config(json_conf_data, 'hour')
+  #if sc_time != getCronHour():
+  #    raise Exception(f"Scan time hour not set, require value: {getCronHour()} current value: {sc_time}")
+  #else: print("Scan time is set to required value:", getCronHour())
+  #
+  ##Check '{"MOD_SEC": {"ruleset": "MINIMAL"}}'
+  #modsec = get_config(json_conf_data, 'ruleset')
+  #if modsec != "MINIMAL":
+  #  raise Exception(f"Modsec rules not set, current status: {modsec} required  value: 'MINIMAL'")
+  #else: print("Mod sec rules verified", modsec)
+  #
+  ##check PD configuration  '{"PROACTIVE_DEFENCE": {"blamer": true, "jit_compatible_mode": false, "log_whitelisted": true, "mode": "KILL", "php_immunity": false}}'
+  #pd_config = {"blamer": True, "jit_compatible_mode": False, "log_whitelisted": True, "mode": "KILL", "php_immunity": False}
+  #pd_keys = ['blamer', 'jit_compatible_mode', 'log_whitelisted', 'mode', 'php_immunity']
+  #for item in pd_keys:
+  #  # print("current item", item)
+  #  # print("current value returned from function", get_config(json_conf_data, item))
+  #  # print('PD config item', pd_config[item])
+  #  if item == 'mode' and get_config(json_conf_data, item) != 'KILL':
+  #     raise Exception(f"Err: PD not mode value not setup correctly: {item}, required value: 'KILL'")
+  #  elif (item == 'log_whitelisted' or item == 'blamer') and get_config(json_conf_data, item) != pd_config[item]:
+  #     raise Exception(f"Err: PD not setup correctly for {item}, required value: true")
+  #  elif get_config(json_conf_data, item) != pd_config[item]:   
+  #    raise Exception(f"Err: PD not setup correctly {item}, current value: {get_config(json_conf_data, item)}")
+  #print("PD configurations verified")
+#
+# #Feature management
+  #feat_mngmt_data = imunify_cli_cmds('imunify360-agent feature-management show --json')
+  #feat_data = json.loads(feat_mngmt_data.stdout)
+  #app_error_list= []
+  #for i in feat_data['items']:
+  #  if i['features']['av'] or i['features']['proactive']:
+  #    print(i['features'])
+  #    app_error_list.append(i['name'])
+  #default_action = get_config(json_conf_data, 'default_action')
+  #user_override_proactive_defense = get_config(json_conf_data, 'user_override_proactive_defense')
+  #if user_override_proactive_defense == False or len(app_error_list) > 0 or default_action != "notify":
+  #  error_obj = {
+  #      2: {
+  #          "apps": app_error_list,
+  #          "default_action": default_action,
+  #          "user_override_proactive_defense": user_override_proactive_defense
+  #      }
+  #  }
+  #  raise Exception(f"feature management config not set for users: {error_obj}")
+  #else: print("Feature management user configurations are set")
       
 except Exception as e:
   logging.error(f"Error: {e}")

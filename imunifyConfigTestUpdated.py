@@ -38,9 +38,9 @@ print("Malware Scan time settings:", json_conf_data['items']['MALWARE_SCAN_SCHED
 print("Default action: ", get_config(json_conf_data, 'default_action'))
 print("User override proactive defense:", get_config(json_conf_data, 'user_override_proactive_defense'))
 print("Modsec ruleset", get_config(json_conf_data, 'ruleset'))
-print("Modsec ruleset", get_config(json_conf_data, 'app_specific_ruleset'))
-print("Modsec ruleset", get_config(json_conf_data, 'cms_account_compromise_prevention'))
-print("Webshield", get_config(json_conf_data, 'enable'))
+print("Modsec app_specific_ruleset", get_config(json_conf_data, 'app_specific_ruleset'))
+print("Modsec cms_account_compromise_prevention", get_config(json_conf_data, 'cms_account_compromise_prevention'))
+print("Webshield Enabled:", get_config(json_conf_data, 'enable'))
 pd_keys = ['blamer', 'jit_compatible_mode', 'log_whitelisted', 'mode', 'php_immunity']
 for items in pd_keys:
    print(f"configuration for PD, {items}", get_config(json_conf_data, items))

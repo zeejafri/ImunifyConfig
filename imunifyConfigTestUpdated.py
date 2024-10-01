@@ -41,8 +41,8 @@ print("Modsec ruleset", get_config(json_conf_data, 'ruleset'))
 print("Modsec app_specific_ruleset", get_config(json_conf_data, 'app_specific_ruleset'))
 print("Modsec cms_account_compromise_prevention", get_config(json_conf_data, 'cms_account_compromise_prevention'))
 print("Webshield:", get_config(json_conf_data, 'WEBSHIELD'))
-print("Webshield Enabled:", json_conf_data['items']['WEBSHIELD']['enable'])
-print("ENHANCED_DOS Enabled:", json_conf_data['items']['ENHANCED_DOS']['enable'])
+print("Webshield Settings:", json_conf_data['items']['WEBSHIELD'])
+print("ENHANCED_DOS Settings:", json_conf_data['items']['ENHANCED_DOS'])
 
 pd_keys = ['blamer', 'jit_compatible_mode', 'log_whitelisted', 'mode', 'php_immunity']
 for items in pd_keys:

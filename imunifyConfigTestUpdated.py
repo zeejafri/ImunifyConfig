@@ -40,9 +40,10 @@ print("User override proactive defense:", get_config(json_conf_data, 'user_overr
 print("Modsec ruleset", get_config(json_conf_data, 'ruleset'))
 print("Modsec app_specific_ruleset", get_config(json_conf_data, 'app_specific_ruleset'))
 print("Modsec cms_account_compromise_prevention", get_config(json_conf_data, 'cms_account_compromise_prevention'))
-print("Webshield:", get_config(json_conf_data, 'WEBSHIELD'))
 print("Webshield Settings:", json_conf_data['items']['WEBSHIELD'])
 print("ENHANCED_DOS Settings:", json_conf_data['items']['ENHANCED_DOS'])
+print("Firewall unified_access_logger:", get_config(json_conf_data, 'unified_access_logger'))
+print("MALWARE_SCANNING Hyperscan status:", get_config(json_conf_data, 'hyperscan'))
 
 pd_keys = ['blamer', 'jit_compatible_mode', 'log_whitelisted', 'mode', 'php_immunity']
 for items in pd_keys:
@@ -53,6 +54,4 @@ feat_data = json.loads(feat_mngmt_data.stdout)
 for item in feat_data['items']:
     print(f"User: {item['name']}")
     print(f"AV: {item['features']['av']}")
-    print(f"Proactive: {item['features']['proactive']}")
-    print(f"Proactive: {item['features']['proactive']}")
     print(f"Proactive: {item['features']['proactive']}")

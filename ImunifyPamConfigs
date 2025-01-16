@@ -1,0 +1,30 @@
+!#/bin/bash
+
+echo "##################### Existing Shorewall configurations"
+echo " "
+echo "************ ALLOW SSH MACRO"
+cat /etc/shorewall/macro.ALLOW_SSH
+echo " "
+echo " "
+echo "************ ALLOW MYSQL MACRO"
+cat /etc/shorewall/macro.MYSQL
+echo " "
+echo " "
+echo " "
+echo "##################### Imunify Configuratoins"
+echo " "
+echo "************ ALLOW SSH FILE"
+cat /etc/imunify360/whitelist/ALLOW_SSH.txt
+echo " "
+echo " "
+echo "************ ALLOW MYSQL FILE"
+cat /etc/imunify360/whitelist/MYSQL.txt
+echo " "
+echo " "
+echo "************ PAM module status"
+imunify360-agent config show | jq '.PAM | keys'
+echo " "
+echo " "
+echo " "
+systemctl status fail2ban
+

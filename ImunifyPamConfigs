@@ -3,11 +3,11 @@
 echo "##################### Existing Shorewall configurations"
 echo " "
 echo "************ ALLOW SSH MACRO"
-cat /etc/shorewall/macro.ALLOW_SSH
+cat /etc/shorewall/macro.ALLOW_SSH | grep PARAM
 echo " "
 echo " "
 echo "************ ALLOW MYSQL MACRO"
-cat /etc/shorewall/macro.MYSQL
+cat /etc/shorewall/macro.MYSQL | grep PARAM
 echo " "
 echo " "
 echo " "

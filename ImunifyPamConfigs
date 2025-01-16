@@ -21,6 +21,10 @@ echo "************ ALLOW MYSQL FILE"
 cat /etc/imunify360/whitelist/MYSQL.txt
 echo " "
 echo " "
+echo "############ Fail2ban jail.conf Enteries"
+cat /etc/fail2ban/jail.conf | grep "ignoreip "
+echo " "
+echo " "
 echo "************ PAM module status"
 imunify360-agent config show | jq '.PAM | keys'
 echo " "
